@@ -1,0 +1,20 @@
+{
+  "name": "mean",
+  "version": "1.0.0",
+  "description": "Class activity",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "MEAN",
+    "MWA"
+  ],
+  "author": "Tuguldur",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2"
+  }
+}
