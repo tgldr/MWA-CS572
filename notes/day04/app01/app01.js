@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const path = require("path");
 const express = require("express");
+require("./api/data/dbconnection").open();
 const routes = require("./api/routes");
 const req = require("express/lib/request");
 const res = require("express/lib/response");
