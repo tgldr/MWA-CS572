@@ -1,18 +1,58 @@
 const dbConnection = require("../data/dbconnection");
-const ObjectId = require("mongodb").ObjectId;
 const mongoose = require("mongoose");
 const Game = mongoose.model(process.env.DB_GAMES_MODEL);
 
+const _runGeoQuery = function (req, res) {
+  const lng = parseFloat(req.query.lng);
+  const lat = parseFloat(req.query.lat);
+  let distance = parseFloat(process.env.GEO_SEARCH_MAX_DIST, 10);
+  if (req.query.dist) {
+    distance = parseFloat(req.query.dist);
+  }
+  const point = {
+    type: "Point",
+    coordinates: [lng, lat],
+  };
+
+  const query = {
+    "publisher.location.coordinates": {
+      $near: {
+        $geometry: point,
+        $maxDistance: distance,
+        $minDistance: parseFloat(process.env.GEO_SEARCH_MIN_DIST, 10),
+      },
+    },
+  };
+
+  Game.find(query).exec(function (err, games) {
+    console.log("Found games with location");
+    res.status(200).json(games);
+  });
+};
+
 getAll = function (req, res) {
   console.log("Controller getAll invoked");
-  let count = 5;
-  let offset = 0;
+  let count = process.env.DEFAULT_FIND_LIMIT;
+  let offset = process.env.DEFAULT_FIND_OFFSET;
+
+  if (req.query && req.query.lat && req.query.lng) {
+    _runGeoQuery(req, res);
+    return;
+  }
 
   if (req.query && req.query.offset) {
     offset = req.query.offset;
   }
   if (req.query && req.query.count) {
     count = req.query.count;
+  }
+
+  if (isNaN(offset) || isNaN(count)) {
+    console.log("offset || count are not a number");
+    res
+      .status(400)
+      .json({ message: "QueryString offset and count should be digits" });
+    return;
   }
 
   Game.find()

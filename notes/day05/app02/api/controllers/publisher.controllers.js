@@ -1,5 +1,4 @@
 const dbConnection = require("../data/dbconnection");
-const ObjectId = require("mongodb").ObjectId;
 const mongoose = require("mongoose");
 const Game = mongoose.model(process.env.DB_GAMES_MODEL);
 
@@ -25,13 +24,15 @@ getAll = function (req, res) {
 };
 
 getOne = function (req, res) {
-  console.log("Controller getOne invoked");
+  console.log("Publisher Controller getOne invoked");
   const gameId = req.params.gameId;
 
-  Game.findById(gameId).exec(function (err, game) {
-    console.log("found game");
-    res.status(200).json(game);
-  });
+  Game.findById(gameId)
+    .select("publisher")
+    .exec(function (err, game) {
+      console.log("found game publisher for game", game);
+      res.status(200).json(game.publisher);
+    });
 };
 
 addOne = function (req, res) {

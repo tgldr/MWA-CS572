@@ -1,37 +1,31 @@
 const dbConnection = require("../data/dbconnection");
-const ObjectId = require("mongodb").ObjectId;
 const mongoose = require("mongoose");
 const Game = mongoose.model(process.env.DB_GAMES_MODEL);
 
 getAll = function (req, res) {
-  console.log("Controller getAll invoked");
-  let count = 5;
-  let offset = 0;
+  console.log("Reviews Controller getAll invoked");
+  const gameId = req.params.gameId;
 
-  if (req.query && req.query.offset) {
-    offset = req.query.offset;
-  }
-  if (req.query && req.query.count) {
-    count = req.query.count;
-  }
-
-  Game.find()
-    .skip(offset)
-    .limit(count)
-    .exec(function (err, games) {
-      console.log("Found games");
-      res.status(200).json(games);
+  Game.findById(gameId)
+    .select("reviews")
+    .exec(function (err, game) {
+      console.log("Found reviews");
+      res.status(200).json(game.reviews);
     });
 };
 
 getOne = function (req, res) {
-  console.log("Controller getOne invoked");
+  console.log("Publisher Controller getOne invoked");
   const gameId = req.params.gameId;
+  const reviewId = req.params.reviewId;
 
-  Game.findById(gameId).exec(function (err, game) {
-    console.log("found game");
-    res.status(200).json(game);
-  });
+  Game.findById(gameId)
+    .select("reviews")
+    .findById(reviewId)
+    .exec(function (err, game) {
+      console.log("found reviews publisher for game", game);
+      res.status(200).json(game.reviews.id(reviewId));
+    });
 };
 
 addOne = function (req, res) {
