@@ -9,6 +9,10 @@ const solveSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  solveStatus: {
+    type: String,
+    default: "solved",
+  },
 });
 
 const rubikSessionsSchema = mongoose.Schema({

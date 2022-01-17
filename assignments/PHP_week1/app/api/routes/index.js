@@ -12,7 +12,8 @@ router
 router
   .route("/sessions/:sessionId")
   .get(rubikSessionsControllers.getOne)
-  .delete(rubikSessionsControllers.deleteOne);
+  .delete(rubikSessionsControllers.deleteOne)
+  .put(rubikSessionsControllers.updateOne);
 
 router.route("/sessions/:sessionId/solve").post(solveControllers.addOne);
 

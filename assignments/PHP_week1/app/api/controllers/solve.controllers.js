@@ -18,8 +18,10 @@ _addSolve = function (req, res, rubikSession) {
 
   rubikSession.solves.push({
     scramble: req.body.scramble,
-    time: req.body.time,
+    time,
+    solveStatus,
   });
+
   rubikSession.save(function (err, updatedSession) {
     const response = {
       status: 201,

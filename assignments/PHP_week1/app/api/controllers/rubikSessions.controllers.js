@@ -123,9 +123,41 @@ addOne = function (req, res) {
   });
 };
 
+updateOne = function (req, res) {
+  const sessionId = req.params.sessionId;
+
+  if (!mongoose.isValidObjectId(sessionId)) {
+    console.log("Request param sessionId is not a valid ID");
+    res
+      .status(400)
+      .json({ message: "Request param sessionId is not a valid ID" });
+    return;
+  }
+
+  RubikSession.findById(sessionId).exec(function (err, rubikSession) {
+    const response = {
+      status: 201,
+      message: rubikSession,
+    };
+
+    rubikSession.title = req.body.title;
+    if (err) {
+      console.log("Error founding rubikSession");
+      response.status = 500;
+      response.message = err;
+    } else if (!rubikSession) {
+      response.status = 404;
+      response.message = "SessionId Not found";
+    }
+
+    res.status(response.status).json(response.message);
+  });
+};
+
 module.exports = {
   getAll,
   getOne,
   addOne,
+  updateOne,
   deleteOne,
 };
