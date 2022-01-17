@@ -2,8 +2,18 @@ const mongoose = require("mongoose");
 const RubikSession = mongoose.model(process.env.DB_RUBIKSESSIONS_MODEL);
 
 _addSolve = function (req, res, rubikSession) {
-  if (!req.body.scramble && !req.body.time) {
+  if (!req.body.scramble || !req.body.time) {
     res.status(500).json({ message: "Scramble or Time field missing" });
+  }
+
+  if (req.body.time) {
+    time = parseInt(req.body.time);
+  }
+
+  if (isNaN(time)) {
+    console.log("time is not a number");
+    res.status(400).json({ message: "Time should be number" });
+    return;
   }
 
   rubikSession.solves.push({
