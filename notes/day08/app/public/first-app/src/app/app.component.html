@@ -21,3 +21,14 @@
 <select>
   <option *ngFor="let student of students">{{ student.name }}</option>
 </select>
+
+<br />
+{{ 123.13 | currency: "₮" }}
+<br />
+{{ dd | date: "YYYY-MM-d" }}
+<br />
+{{ "Maharishi University" | uppercase }}
+<br />
+{{ 123.4566789 | number: "1.0-5" }}
+<br />
+{{ 123.4589 | number: "4.10-20" }}

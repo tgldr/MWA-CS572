@@ -32,6 +32,7 @@ export class AppComponent {
     },
   ];
   showHidden: boolean = true;
+  dd = new Date();
 
   get name() {
     return this.#name;
