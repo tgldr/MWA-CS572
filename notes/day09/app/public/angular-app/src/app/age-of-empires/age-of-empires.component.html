@@ -1,0 +1,17 @@
+<h2>Level {{ level }} all skills</h2>
+<button (click)="onClickButton(1)">1</button>
+<button (click)="onClickButton(2)">2</button>
+<button (click)="onClickButton(3)">3</button>
+<button (click)="onClickButton(4)">4</button>
+<button (click)="onClickButton(5)">5</button>
+<button (click)="onClickButton(6)">6</button>
+<button (click)="onClickButton(7)">7</button>
+<button (click)="onClickButton(8)">8</button>
+<button (click)="onClickButton(9)">9</button>
+<ul>
+  <li *ngFor="let civil of civilizations">
+    <a routerLink="skill/{{ civil.index }}">
+      {{ civil.name }} | API:{{ civil.url }}
+    </a>
+  </li>
+</ul>
