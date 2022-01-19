@@ -1,13 +1,36 @@
-<h2>Level {{ level }} all skills</h2>
-<button (click)="onClickButton(1)">1</button>
-<button (click)="onClickButton(2)">2</button>
-<button (click)="onClickButton(3)">3</button>
-<button (click)="onClickButton(4)">4</button>
-<button (click)="onClickButton(5)">5</button>
-<button (click)="onClickButton(6)">6</button>
-<button (click)="onClickButton(7)">7</button>
-<button (click)="onClickButton(8)">8</button>
-<button (click)="onClickButton(9)">9</button>
+<h2>Level {{ level }} skills. Total {{ total }}</h2>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <button class="page-link" (click)="onClickButton(1)">1</button>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="onClickButton(2)">2</button>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="onClickButton(3)">3</button>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="onClickButton(4)">4</button>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="onClickButton(5)">5</button>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="onClickButton(6)">6</button>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="onClickButton(7)">7</button>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="onClickButton(8)">8</button>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="onClickButton(9)">9</button>
+    </li>
+  </ul>
+</nav>
+
 <ul>
   <li *ngFor="let civil of civilizations">
     <a routerLink="skill/{{ civil.index }}">

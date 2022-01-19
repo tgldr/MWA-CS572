@@ -32,20 +32,22 @@ export class Fact {
 export class AgeOfEmpiresComponent implements OnInit {
   civilizations: Fact[] = [];
   level = 1;
+  total = 0;
 
-  constructor(private factsService: FactsApiService) {
-    factsService.getFacts(this.level).then((facts) => {
-      console.log(facts);
+  constructor(private factsService: FactsApiService) {}
+
+  ngOnInit(): void {
+    this.factsService.getFacts(this.level).then((facts) => {
+      this.total = facts.length;
       this.civilizations = facts;
     });
   }
 
-  ngOnInit(): void {}
   onClickButton(level: number) {
     this.level = level;
     this.factsService.getFacts(this.level).then((facts) => {
-      console.log(facts);
       this.civilizations = facts;
+      this.total = facts.length;
     });
   }
 }
