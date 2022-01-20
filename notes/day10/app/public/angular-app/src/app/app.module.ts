@@ -10,6 +10,7 @@ import { GamesComponent } from './games/games.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AgeOfEmpiresComponent } from './age-of-empires/age-of-empires.component';
 import { SkillDetailComponent } from './skill-detail/skill-detail.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,10 @@ import { SkillDetailComponent } from './skill-detail/skill-detail.component';
       {
         path: 'games',
         component: GamesComponent,
+      },
+      {
+        path: 'game/:gameId',
+        component: GameComponent,
       },
       {
         path: 'dnd',

@@ -1,19 +1,45 @@
 import { Component, OnInit } from '@angular/core';
+import { GamesDataService } from '../games-data.service';
 
-class Game {
+export class Game {
+  #_id!: string;
   #title!: String;
+  #year!: String;
+  #rate!: String;
+  #minPlayers!: String;
+  #maxPlayers!: String;
+  #minAge!: String;
   #price!: Number;
 
+  get _id() {
+    return this.#_id;
+  }
   get title() {
     return this.#title;
+  }
+  get year() {
+    return this.#year;
+  }
+  get rate() {
+    return this.#rate;
+  }
+  get minPlayers() {
+    return this.#minPlayers;
+  }
+  get maxPlayers() {
+    return this.#maxPlayers;
+  }
+  get minAge() {
+    return this.#minAge;
   }
   get price() {
     return this.#price;
   }
 
-  constructor(title: String, price: Number) {
+  constructor(title: String, price: Number, id: string) {
     this.#title = title;
     this.#price = price;
+    this.#_id = id;
   }
 }
 
@@ -25,10 +51,20 @@ class Game {
 export class GamesComponent {
   games: Game[] = [];
 
-  constructor() {
-    let catan = new Game('Catan', 39.99);
-    let game = new Game('Catan', 39.99);
-    this.games.push(game);
-    this.games.push(catan);
+  constructor(private gamesDataService: GamesDataService) {}
+
+  ngOnInit(): void {
+    this.gamesDataService
+      .getGames()
+      .then((response) => this._setGames(response))
+      .catch((error) => this._errorHandler(error));
+  }
+
+  private _errorHandler(error: any): void {
+    console.log('While getting games. ', error);
+  }
+
+  private _setGames(games: Game[]): void {
+    this.games = games;
   }
 }
