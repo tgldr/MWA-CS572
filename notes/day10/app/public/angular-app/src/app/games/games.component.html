@@ -1,5 +1,43 @@
-<ul>
-  <li *ngFor="let game of games">
-    <a [routerLink]="['/game', game._id]">{{ game.title }}</a>
-  </li>
-</ul>
+<h2>Games List</h2>
+<div class="list-group">
+  <a
+    *ngFor="let game of games"
+    class="list-group-item list-group-item-action"
+    [routerLink]="['/game', game._id]"
+    >{{ game.title }}</a
+  >
+</div>
+
+<h2>Add New Game</h2>
+
+<form>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      placeholder="Game Name"
+      [(ngModel)]="newGame.title"
+      name="title"
+    />
+  </div>
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input
+      type="text"
+      class="form-control"
+      id="price"
+      placeholder="Game Price"
+      [(ngModel)]="newGame.price"
+      name="price"
+    />
+  </div>
+  <div class="form-group">
+    <button (click)="addOne()" type="submit" class="btn btn-primary">
+      Submit
+    </button>
+  </div>
+</form>
+
+{{ newGame.title }}: {{ newGame.price }}

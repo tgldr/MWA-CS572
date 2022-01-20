@@ -27,6 +27,15 @@ export class GamesDataService {
       .catch(this._handleError);
   }
 
+  addGame(game: Game): Promise<Game> {
+    const url: string = `${this.baseUrl}games`;
+    return this.http
+      .post(url, game)
+      .toPromise()
+      .then((response: any) => response as Game)
+      .catch(this._handleError);
+  }
+
   private _handleError(error: any): Promise<any> {
     console.log('Something went wrong', error);
     return Promise.reject(error.message || error);

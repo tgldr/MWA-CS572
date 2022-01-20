@@ -17,6 +17,9 @@ export class Game {
   get title() {
     return this.#title;
   }
+  set title(title: String) {
+    this.#title = title;
+  }
   get year() {
     return this.#year;
   }
@@ -35,6 +38,9 @@ export class Game {
   get price() {
     return this.#price;
   }
+  set price(price: Number) {
+    this.#price = price;
+  }
 
   constructor(title: String, price: Number, id: string) {
     this.#title = title;
@@ -50,6 +56,7 @@ export class Game {
 })
 export class GamesComponent {
   games: Game[] = [];
+  newGame: Game = new Game('', 0, '');
 
   constructor(private gamesDataService: GamesDataService) {}
 
@@ -66,5 +73,12 @@ export class GamesComponent {
 
   private _setGames(games: Game[]): void {
     this.games = games;
+  }
+
+  addOne(): void {
+    this.gamesDataService
+      .addGame(this.newGame)
+      .then((response) => console.log(response))
+      .catch((error) => this._errorHandler(error));
   }
 }
