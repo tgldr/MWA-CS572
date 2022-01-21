@@ -1,0 +1,28 @@
+<table class="fixed_headers">
+  <thead>
+    <tr>
+      <th>Job title</th>
+      <th>Job description</th>
+      <th>Experience</th>
+      <th>Skills</th>
+      <th>Posted</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let job of jobs">
+      <td>{{ job.title }}</td>
+      <td>{{ job.description }}</td>
+      <td>{{ job.experience }}</td>
+      <td>
+        <ol>
+          <li *ngFor="let skill of job.skills">
+            {{ skill }}
+          </li>
+        </ol>
+      </td>
+      <td>{{ job.postDate | date }}</td>
+      <td>{{ job.location.coordinates }}</td>
+    </tr>
+  </tbody>
+</table>
