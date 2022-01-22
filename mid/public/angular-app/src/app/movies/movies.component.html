@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let movie of movies">
+    <a [routerLink]="['/move', movie._id]">{{ movie.title }}</a>
+  </li>
+</ul>
