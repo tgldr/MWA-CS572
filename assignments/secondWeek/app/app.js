@@ -2,17 +2,10 @@ require("dotenv").config();
 
 const path = require("path");
 const express = require("express");
-require("./api/data/dbconnection").open();
+require("./api/data/db");
 const routes = require("./api/routes");
-const req = require("express/lib/request");
-const res = require("express/lib/response");
 
 const app = express();
-
-app.use("/css", function (req, res, next) {
-  console.log(req.method, req.url);
-  next();
-});
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
@@ -21,6 +14,16 @@ app.use(
     extended: true,
   })
 );
+
+app.use("/api", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
 
 app.use("/api", routes);
 
