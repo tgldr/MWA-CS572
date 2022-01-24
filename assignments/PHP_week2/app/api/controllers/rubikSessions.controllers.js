@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const RubikSession = mongoose.model(process.env.DB_RUBIKSESSIONS_MODEL);
 
 getAll = function (req, res) {
+  let query;
   let count = parseInt(process.env.DEFAULT_FIND_LIMIT);
   let offset = parseInt(process.env.DEFAULT_FIND_OFFSET);
   const maxCount = parseInt(process.env.MAX_FIND_LIMIT);
@@ -29,18 +30,24 @@ getAll = function (req, res) {
     return;
   }
 
-  RubikSession.find()
-    .skip(offset)
-    .limit(count)
-    .exec(function (err, rubikSessions) {
-      if (err) {
-        console.log("error");
-        res.status(500).json(err);
-      } else {
-        console.log("Found RubikSessions");
-        res.status(200).json(rubikSessions);
-      }
-    });
+  if (req.query && req.query.title) {
+    query = { title: { $regex: new RegExp(req.query.title, "i") } };
+  }
+
+  console.log(query);
+
+  RubikSession.find(query, null, { skip: offset, limit: count }).exec(function (
+    err,
+    rubikSessions
+  ) {
+    if (err) {
+      console.log("error");
+      res.status(500).json(err);
+    } else {
+      console.log("Found RubikSessions");
+      res.status(200).json(rubikSessions);
+    }
+  });
 };
 
 getOne = function (req, res) {

@@ -55,9 +55,6 @@ export class SessionsComponent implements OnInit {
       .getSessions()
       .then((response) => {
         this._setSessions(response);
-        if (response.length > 0) {
-          this.session = response[0];
-        }
       })
       .catch((error) => this.errorHandler(error));
   }

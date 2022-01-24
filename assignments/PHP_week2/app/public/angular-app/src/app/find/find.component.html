@@ -1,0 +1,37 @@
+<div class="find-container">
+  <h3>Search Session Name:</h3>
+  <form class="row g-3">
+    <div class="col-auto">
+      <input
+        [(ngModel)]="sessionName"
+        type="text"
+        class="form-control"
+        placeholder="Session name"
+        name="sessionName"
+      />
+    </div>
+    <div class="col-auto">
+      <button (click)="searchSession()" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  <h4 style="margin-top: 40px">Sessions find total {{ sessions.length }}:</h4>
+  <div class="col-lg-5">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Total Solves</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let x of sessions">
+        <td>
+          {{ x.title }}
+        </td>
+        <td>
+          {{ x.solves.length }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

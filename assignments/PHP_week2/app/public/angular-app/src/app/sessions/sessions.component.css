@@ -1,0 +1,17 @@
+.sidebar {
+  width: 300px;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  height: 100vh;
+  overflow: scroll;
+  border-right: 1px solid #333;
+  padding: 20px;
+}
+
+.main-timer {
+  height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

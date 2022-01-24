@@ -12,7 +12,7 @@ export class SessionApiService {
 
   constructor(private http: HttpClient) {}
 
-  public getSessions(): Promise<Session[]> {
+  getSessions(): Promise<Session[]> {
     const url: string = this.#apiBaseUrl + 'sessions';
     return this.http
       .get(url)
@@ -21,7 +21,7 @@ export class SessionApiService {
       .catch(this.handleError);
   }
 
-  public getSession(id: string): Promise<Session> {
+  getSession(id: string): Promise<Session> {
     const url: string = this.#apiBaseUrl + 'sessions/' + id;
     return this.http
       .get(url)
@@ -30,7 +30,16 @@ export class SessionApiService {
       .catch(this.handleError);
   }
 
-  public addSession(newSession: Session): Promise<Session> {
+  findSessionByName(title: string): Promise<Session[]> {
+    const url: string = this.#apiBaseUrl + 'sessions?title=' + title;
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((response: any) => response as Session)
+      .catch(this.handleError);
+  }
+
+  addSession(newSession: Session): Promise<Session> {
     const url: string = this.#apiBaseUrl + 'sessions';
     return this.http
       .post(url, {
@@ -41,7 +50,7 @@ export class SessionApiService {
       .catch(this.handleError);
   }
 
-  public delete(session: Session): Promise<Session> {
+  delete(session: Session): Promise<Session> {
     const url: string = this.#apiBaseUrl + 'sessions/' + session._id;
     return this.http
       .delete(url)
@@ -50,13 +59,13 @@ export class SessionApiService {
       .catch(this.handleError);
   }
 
-  public deleteSolve(session: Session, id: string): Promise<Session> {
+  deleteSolve(session: Session, id: string): Promise<Session> {
     const url: string =
       this.#apiBaseUrl + 'sessions/' + session._id + '/solve/' + id;
     return this.http.delete(url).toPromise().catch(this.handleError);
   }
 
-  public addSolve(
+  addSolve(
     session: Session,
     newSolve: { scramble: string; time: string }
   ): Promise<Session> {
