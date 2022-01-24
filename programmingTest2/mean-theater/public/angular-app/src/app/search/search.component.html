@@ -1,0 +1,19 @@
+<p>Search Page</p>
+
+<p>Latitude:</p>
+<input [(ngModel)]="latitude" name="latitude" />
+<p>Longitude:</p>
+<input [(ngModel)]="longitude" name="longitude" />
+<p>Distance:</p>
+<input [(ngModel)]="distance" name="distance" />
+
+<br />
+<button (click)="onClick()">Search</button>
+
+<ul>
+  <li *ngFor="let x of theaters">
+    <a routerLink="{{ x._id }}">
+      {{ x._id }} - {{ x.location.address.city }}
+    </a>
+  </li>
+</ul>

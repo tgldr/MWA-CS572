@@ -1,0 +1,16 @@
+<div class="scramble">
+  <strong>Scramble:</strong>
+  {{ scramble }}
+  <button (click)="generateScramble()" class="new-btn btn btn-primary">
+    Next
+  </button>
+
+  <div class="timer-container">
+    <section class="timer-counter-label">
+      <div>
+        {{ time }}
+      </div>
+    </section>
+    <span>Press "Space Bar" to start or stop</span>
+  </div>
+</div>

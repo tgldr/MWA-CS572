@@ -1,0 +1,39 @@
+.scramble {
+  padding: 20px;
+}
+
+.scramble strong {
+  margin-right: 5px;
+}
+
+.new-btn {
+  margin-left: 15px;
+}
+
+.timer-counter-label {
+  display: flex;
+  align-items: center;
+  font-size: 10em;
+  margin-bottom: 0.5em;
+  min-height: 350px;
+}
+
+.timer-button-container {
+  display: flex;
+}
+.timer-button {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  font-size: 2em;
+  padding: 10px;
+  margin: 5px 10px;
+  min-width: 150px;
+}
+
+.timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
