@@ -34,8 +34,6 @@ getAll = function (req, res) {
     query = { title: { $regex: new RegExp(req.query.title, "i") } };
   }
 
-  console.log(query);
-
   RubikSession.find(query, null, { skip: offset, limit: count }).exec(function (
     err,
     rubikSessions

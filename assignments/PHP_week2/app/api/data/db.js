@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-require("./students-model");
+require("./rubikSessions-model");
 mongoose.connect(process.env.DB_URL);
 
 mongoose.connection.on("connected", function () {
