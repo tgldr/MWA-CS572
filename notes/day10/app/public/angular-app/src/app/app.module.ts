@@ -13,6 +13,8 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { AgeOfEmpiresComponent } from './age-of-empires/age-of-empires.component';
 import { SkillDetailComponent } from './skill-detail/skill-detail.component';
 import { GameComponent } from './game/game.component';
+import { OrderPipe } from './order.pipe';
+import { VowelRemoverPipe } from './vowel-remover.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { GameComponent } from './game/game.component';
     ErrorPageComponent,
     AgeOfEmpiresComponent,
     SkillDetailComponent,
+    OrderPipe,
+    VowelRemoverPipe,
   ],
   imports: [
     BrowserModule,

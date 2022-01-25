@@ -10,6 +10,7 @@ import { SolveComponent } from './solve/solve.component';
 import { SessionsComponent } from './sessions/sessions.component';
 import { FindComponent } from './find/find.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { TimerPipe } from './timer.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     SessionsComponent,
     FindComponent,
     NavigationComponent,
+    TimerPipe,
   ],
   imports: [
     BrowserModule,

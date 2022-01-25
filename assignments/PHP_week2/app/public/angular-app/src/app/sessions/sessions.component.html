@@ -50,7 +50,7 @@
     <tbody *ngIf="session !== undefined">
       <tr *ngFor="let t of session.solves; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ t.time }}</td>
+        <td>{{ t.time | timer }}</td>
         <td>
           <button class="btn btn-link" (click)="deleteSolve(t._id)">x</button>
         </td>

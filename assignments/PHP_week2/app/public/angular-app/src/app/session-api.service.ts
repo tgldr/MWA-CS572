@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Session } from './sessions/sessions.component';
-import { Solve } from './solve/solve.component';
 
 @Injectable({
   providedIn: 'root',
@@ -67,7 +66,7 @@ export class SessionApiService {
 
   addSolve(
     session: Session,
-    newSolve: { scramble: string; time: string }
+    newSolve: { scramble: string; time: number }
   ): Promise<Session> {
     const url: string = this.#apiBaseUrl + 'sessions/' + session._id + '/solve';
 

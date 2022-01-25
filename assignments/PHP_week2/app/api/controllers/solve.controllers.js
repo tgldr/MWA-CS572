@@ -7,6 +7,16 @@ _addSolve = function (req, res, rubikSession) {
       .status(500)
       .json({ message: "Scramble or Time or SolveStatus field missing" });
   }
+  if (isNaN(req.body.time)) {
+    console.log("time is not a number");
+    res.status(400).json({ message: "QueryString time should be number" });
+    return;
+  }
+
+  // let seconds = (req.body.time / 1000).toFixed(0);
+  //   let milliseconds = ((req.body.time % 1000) / 10).toFixed(0);
+  //   // @ts-ignore: Unreachable code error
+  //   let time = (seconds < 10 ? '0' : '') + seconds + ':' + milliseconds;
 
   rubikSession.solves.push({
     scramble: req.body.scramble,

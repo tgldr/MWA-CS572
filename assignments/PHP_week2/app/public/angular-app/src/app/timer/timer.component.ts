@@ -15,7 +15,6 @@ export class TimerComponent implements OnInit {
   getSession = new EventEmitter<string>();
 
   scramble: string = '';
-  time: string = '00:00';
   counter!: number;
   timerRef!: any;
   running: boolean = false;
@@ -28,7 +27,7 @@ export class TimerComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.keyCode === 32) {
+    if (event.keyCode === 32 && this.session) {
       this.startTimer();
       event.preventDefault();
     }
@@ -40,14 +39,13 @@ export class TimerComponent implements OnInit {
       const startTime = Date.now() - 0;
       this.timerRef = setInterval(() => {
         this.counter = Date.now() - startTime;
-        this.msToDisplay();
       });
     } else {
       clearInterval(this.timerRef);
       this.sessionService
         .addSolve(this.session, {
           scramble: this.scramble,
-          time: this.time,
+          time: this.counter,
         })
         .then(() => {
           this.getSession.emit(this.session._id);
@@ -60,13 +58,6 @@ export class TimerComponent implements OnInit {
   private errorHandler(error: any): void {
     clearInterval(this.timerRef);
     console.log('While getting sessions', error);
-  }
-
-  msToDisplay() {
-    let seconds = (this.counter / 1000).toFixed(0);
-    let milliseconds = ((this.counter % 1000) / 10).toFixed(0);
-    // @ts-ignore: Unreachable code error
-    this.time = (seconds < 10 ? '0' : '') + seconds + ':' + milliseconds;
   }
 
   ngOnDestroy() {
