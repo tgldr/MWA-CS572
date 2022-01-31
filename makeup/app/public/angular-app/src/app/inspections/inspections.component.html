@@ -1,0 +1,10 @@
+<ul>
+  <li *ngFor="let i of inspections">
+    <a routerLink="/inspections/{{ i._id }}">
+      {{ i.business_name }}
+    </a>
+  </li>
+</ul>
+
+<button (click)="prev()" [disabled]="isOffsetZero">Previous</button>
+<button (click)="next()">Next</button>
