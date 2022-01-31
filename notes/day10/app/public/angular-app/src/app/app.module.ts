@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
@@ -15,6 +15,8 @@ import { SkillDetailComponent } from './skill-detail/skill-detail.component';
 import { GameComponent } from './game/game.component';
 import { OrderPipe } from './order.pipe';
 import { VowelRemoverPipe } from './vowel-remover.pipe';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +30,14 @@ import { VowelRemoverPipe } from './vowel-remover.pipe';
     SkillDetailComponent,
     OrderPipe,
     VowelRemoverPipe,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -53,6 +58,14 @@ import { VowelRemoverPipe } from './vowel-remover.pipe';
       {
         path: 'skill/:id',
         component: SkillDetailComponent,
+      },
+      {
+        path: 'register',
+        component: RegisterComponent,
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
       },
       {
         path: '**',
