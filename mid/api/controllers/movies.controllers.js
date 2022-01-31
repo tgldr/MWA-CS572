@@ -1,5 +1,3 @@
-const req = require("express/lib/request");
-const res = require("express/lib/response");
 const mongoose = require("mongoose");
 const Movie = mongoose.model(process.env.MOVIE_MODEL);
 
