@@ -201,7 +201,6 @@ getOne = function (req, res) {
 
 addOne = function (req, res) {
   console.log("POST new game");
-  console.log(req.body);
 
   const newGame = {
     title: req.body.title,

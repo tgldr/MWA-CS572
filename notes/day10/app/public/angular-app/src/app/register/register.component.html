@@ -1,3 +1,6 @@
+<div class="alert alert-danger" *ngIf="hasError">{{ errorMsg }}</div>
+<div class="alert alert-success" *ngIf="hasSuccess">{{ successMsg }}</div>
+
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)">
   <div>
     <label>Name: </label>

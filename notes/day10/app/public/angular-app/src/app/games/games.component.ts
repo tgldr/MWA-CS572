@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
 import { GamesDataService } from '../games-data.service';
 
 export class Game {
@@ -58,7 +59,14 @@ export class GamesComponent {
   games: Game[] = [];
   newGame: Game = new Game('', 0, '');
 
-  constructor(private gamesDataService: GamesDataService) {}
+  get isLoggedIn() {
+    return this.authService.isLoggedIn;
+  }
+
+  constructor(
+    private gamesDataService: GamesDataService,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
     this.gamesDataService

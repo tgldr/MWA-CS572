@@ -30,7 +30,10 @@ export class GamesDataService {
   addGame(game: Game): Promise<Game> {
     const url: string = `${this.baseUrl}games`;
     return this.http
-      .post(url, game)
+      .post(url, {
+        title: game.title,
+        price: game.price,
+      })
       .toPromise()
       .then((response: any) => response as Game)
       .catch(this._handleError);

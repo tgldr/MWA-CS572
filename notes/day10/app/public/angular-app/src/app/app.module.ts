@@ -17,6 +17,7 @@ import { OrderPipe } from './order.pipe';
 import { VowelRemoverPipe } from './vowel-remover.pipe';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,10 @@ import { LoginComponent } from './login/login.component';
       },
     ]),
   ],
-  providers: [],
+  providers: [
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

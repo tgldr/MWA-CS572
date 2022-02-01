@@ -8,36 +8,36 @@
   >
 </div>
 
-<h2>Add New Game</h2>
+<div *ngIf="isLoggedIn">
+  <h2>Add New Game</h2>
 
-<form>
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input
-      type="text"
-      class="form-control"
-      id="title"
-      placeholder="Game Name"
-      [(ngModel)]="newGame.title"
-      name="title"
-    />
-  </div>
-  <div class="form-group">
-    <label for="price">Price</label>
-    <input
-      type="text"
-      class="form-control"
-      id="price"
-      placeholder="Game Price"
-      [(ngModel)]="newGame.price"
-      name="price"
-    />
-  </div>
-  <div class="form-group">
-    <button (click)="addOne()" type="submit" class="btn btn-primary">
-      Submit
-    </button>
-  </div>
-</form>
-
-{{ newGame.title }}: {{ newGame.price }}
+  <form>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Game Name"
+        [(ngModel)]="newGame.title"
+        name="title"
+      />
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input
+        type="text"
+        class="form-control"
+        id="price"
+        placeholder="Game Price"
+        [(ngModel)]="newGame.price"
+        name="price"
+      />
+    </div>
+    <div class="form-group">
+      <button (click)="addOne()" type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
