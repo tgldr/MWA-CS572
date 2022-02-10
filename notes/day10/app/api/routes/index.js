@@ -9,7 +9,7 @@ const router = express.Router();
 router
   .route("/games")
   .get(gamesControllers.getAll)
-  .post(gamesControllers.addOne);
+  .post(usersControllers.authenticate, gamesControllers.addOne);
 
 router
   .route("/game/:gameId")

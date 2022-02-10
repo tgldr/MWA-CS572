@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 require("./api/data/db");
 const routes = require("./api/routes");
+const { application } = require("express");
 
 const app = express();
 
@@ -28,6 +29,15 @@ app.use("/api", function (req, res, next) {
   res.header("Access-Control-Allow-Methods", "*");
   next();
 });
+
+// app.use("/api", function(req, res, next){
+//   if(){
+//     next()
+//   }else{
+//     res.status(401).json({message: "Not auth"})
+//   }
+// })
+
 app.use("/api", routes);
 
 const server = app.listen(process.env.PORT, function () {

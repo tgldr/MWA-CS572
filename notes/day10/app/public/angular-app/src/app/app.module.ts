@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -18,6 +18,8 @@ import { VowelRemoverPipe } from './vowel-remover.pipe';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { ProfileComponent } from './profile/profile.component';
+import { TokenInspectorService } from './token-inspector.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     VowelRemoverPipe,
     RegisterComponent,
     LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,10 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
         component: AgeOfEmpiresComponent,
       },
       {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
         path: 'skill/:id',
         component: SkillDetailComponent,
       },
@@ -77,6 +84,11 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInspectorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

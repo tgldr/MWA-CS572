@@ -1,5 +1,0 @@
-{
-  "signal": "SIGHUP",
-  "ignore": ["public/*"],
-  "verbose": true
-}

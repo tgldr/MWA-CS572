@@ -73,4 +73,32 @@ const login = (req, res) => {
   }
 };
 
-module.exports = { addOne, login };
+const authenticate = function (req, res, next) {
+  const authHeader = req.headers && req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  const response = {
+    status: 200,
+    message: {},
+  };
+
+  console.log("token", token);
+
+  if (token === null) {
+    response.status = 401;
+    response.message = { message: "Wrong Token" };
+    res.status(response.status).json(response.message);
+  } else {
+    jwt.verify(token, process.env.TOKEN_PASSWORD, function (err, user) {
+      if (err) {
+        response.status = 403;
+        response.message = { message: "Wrong Token" };
+        res.status(response.status).json(response.message);
+      } else {
+        next();
+      }
+    });
+  }
+};
+
+module.exports = { addOne, login, authenticate };
